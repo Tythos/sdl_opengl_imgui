@@ -17,36 +17,33 @@ int main(int nArgs, char** vArgs) {
         printf("SDL initialization failed: %s\n", SDL_GetError());
         return -1;
     }
+
+    // create a window
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-    SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
-
-    // cerate a window
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+    SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
     SDL_Window* window = SDL_CreateWindow("sdl_opengl_imgui", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
     if (!window) {
         printf("SDL window creation failed: %s\n", SDL_GetError());
         return -1;
     }
 
-    // create an OpenGL graphics context
+    // create an OpenGL and ImGui context
     SDL_GLContext gl_context = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, gl_context);
     SDL_GL_SetSwapInterval(1);
-
-    // create an ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
-    (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    ImGui::StyleColorsDark();
 
-    // setup platform/renderer backends & background
+    // setup platform/renderer style, backends, background
+    ImGui::StyleColorsDark();
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL3_Init(glsl_version);
     ImVec4 bg = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
