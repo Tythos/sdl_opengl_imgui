@@ -75,13 +75,11 @@ int main(int nArgs, char** vArgs) {
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
-        // draw basic UI window TODO: customize
+        // draw basic UI window
         static float f = 0.0f;
         static int counter = 0;
         ImGui::Begin("Hello world!");
         ImGui::Text("This is some useful text.");
-        ImGui::Checkbox("Demo Window", &show_demo_window);
-        ImGui::Checkbox("Another Window", &show_another_window);
         ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
         ImGui::ColorEdit3("clear color", (float*)&bg);
         if (ImGui::Button("Button")) {

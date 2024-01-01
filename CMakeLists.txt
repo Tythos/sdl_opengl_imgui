@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(imguibox)
+project(sdl_opengl_imgui)
 add_subdirectory("sdl/" EXCLUDE_FROM_ALL)
 add_executable(${PROJECT_NAME}
     "main.cpp"
